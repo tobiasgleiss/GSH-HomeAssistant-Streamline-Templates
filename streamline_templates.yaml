@@ -1,0 +1,201 @@
+# ==================================================================
+#  TEMPLATE: CUSTOM Section HEADER CARD
+#
+#  A header for the different sections
+# ==================================================================
+
+template_custom_section_header_card:
+  default:
+    - name: Default Section Title
+  card:
+    type: markdown
+    content: |
+      # [[name]]
+    text_only: true
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            background: none;
+            backdrop-filter: none;
+            color: white;
+          }
+        ha-markdown$: |
+          h1 {
+            font-size: 16px !important;
+            font-family: 'Roboto', sans-serif;
+            padding-top: 20px;
+            padding-bottom: 10px;
+          }
+
+# ==================================================================
+#  TEMPLATE: CUSTOM FROSTED GLASS SENSOR CARD
+#
+#  A sensor card showing name, state and an icon.
+# ==================================================================
+
+template_custom_frosted_glass_sensor_card:
+  default:
+    - name: My frosted glass card
+    - icon: ios:house
+  card:
+    type: custom:button-card
+    name: "[[name]]"
+    icon: "[[icon]]"
+    entity: "[[entity]]"
+    show_icon: true
+    show_name: true
+    show_state: true
+    state_color: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    styles:
+      card:
+        - min-width: 250px
+        - max-width: 300px
+        - width: 100%
+        - padding: 20px
+        - font-family: Roboto
+      grid:
+        - display: grid
+        - grid-template-areas: |
+            "n i"
+            "s i"
+        - grid-template-columns: auto 1fr
+        - grid-template-rows: auto auto
+        - align-items: center
+        - row-gap: 5px
+      name:
+        - grid-area: "n"
+        - justify-self: start
+        - font-size: 16px
+        - font-weight: 500
+      state:
+        - grid-area: s
+        - justify-self: start
+        - font-size: 16px
+        - font-weight: 300
+      img_cell:
+        - grid-area: i
+        - justify-self: end
+        - width: 70px
+      icon:
+        - color: white !important
+
+# ==================================================================
+#  TEMPLATE: CUSTOM FROSTED GLASS BUTTON CARD WITH SINGLE ACTION
+#
+#  A button card, showing name, label and icon, executing a action.
+# ==================================================================
+
+template_custom_frosted_glass_button_single_action:
+  default:
+    entity: cover.rollladen_wohnzimmer
+    name: My frosted glass button card
+    label: Leise hochfahren
+    icon: ios:blinds-horizontal-open
+  card:
+    type: custom:button-card
+    entity: "[[entity]]"
+    name: "[[name]]"
+    label: "[[label]]"
+    icon: "[[icon]]"
+    tap_action:
+      action: call-service
+      service: script.turn_on
+      target:
+        entity_id: "[[entity]]"
+    show_name: true
+    show_label: true
+    styles:
+      card:
+        - padding: 30px
+        - align-items: center
+        - font-family: Roboto
+        - min-width: 300px
+        - max-width: 400px
+        - width: 100%
+        - max-height: 120px
+        - height: 120px
+      grid:
+        - display: grid
+        - grid-template-areas: |
+            "name icon"
+            "label icon"
+        - grid-template-columns: auto 1fr
+        - row-gap: 5px
+      img_cell:
+        - grid-area: icon
+        - justify-self: end
+        - width: 60px
+      name:
+        - grid-area: name
+        - justify-self: start
+        - font-size: 16px
+        - font-weight: 500
+      label:
+        - grid-area: label
+        - justify-self: start
+        - font-size: 22px
+        - font-weight: 300
+      icon:
+        - color: white
+
+# ==================================================================
+#  TEMPLATE: CUSTOM FROSTED GLASS SENSOR CARD WITH LINE GRAPH
+#
+#  A sensor card, showing a line graph.
+# ==================================================================
+
+template_custom_frosted_glass_sensor_card_line_graph:
+  default:
+    - name: My frosted glass sensor card with line graph
+    - entity: sensor.speedtest_download
+    - hours_to_show: 24
+  card:
+    type: custom:mod-card
+    style: |
+      ha-card {
+        grid-column: 1 / -1 !important;
+      }
+    detail: 1
+    hours_to_show: "[[hours_to_show]]"
+    card:
+      type: sensor
+      entity: "[[entity]]"
+      name: "[[name]]"
+      graph: line
+      card_mod:
+        style: |
+          ha-card {
+            font-family: 'Roboto';
+            color: white;
+            --primary-text-color: white;
+            --secondary-text-color: white;
+            --ha-card-header-color: white;
+            --accent-color: #D8A373;
+          }
+          ha-card .info {
+            color: white;
+          }
+          ha-card .name,
+          ha-card .unit,
+          ha-card .value {
+            color: white !important;
+            padding-left: 15px;
+          }
+          ha-card .value {
+            font-size: 22px;
+            font-weight: 300;
+          }
+          ha-card .state__name {
+            font-size: 16px;
+            font-weight: 500;
+          }
+          ha-state-icon {
+            display: none;
+          }
